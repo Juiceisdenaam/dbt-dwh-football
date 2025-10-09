@@ -1,0 +1,10 @@
+version: 2
+
+sources:
+  - name: ingestion
+    schema: ingestion
+    tables:
+      - name: sportmonks_src_cities
+      - name: sportmonks_src_continents
+      - name: sportmonks_src_countries
+      - name: sportmonks_src_regions
