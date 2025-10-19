@@ -8,3 +8,16 @@ sources:
       - name: sportmonks_src_continents
       - name: sportmonks_src_countries
       - name: sportmonks_src_regions
+      - name: sportmonks_src_fixtures
+      - name: sportmonks_src_players
+      - name: sportmonks_src_teams
+      - name: sportmonks_src_venues
+      - name: sportmonks_src_transfers
+      - name: sportmonks_src_coaches
+      - name: sportmonks_src_leagues
+      - name: sportmonks_src_referees
+      - name: sportmonks_src_seasons
+      - name: sportmonks_src_squads
+      - name: sportmonks_src_standings
+      - name: sportmonks_src_tv_stations
+      - name: sportmonks_src_types
