@@ -10,7 +10,7 @@ with src AS (
 flattened AS (
 
     select
-        md5(concat_ws('-', fixture_id::text, score ->> 'id')) as score_sk,
+        md5(concat_ws('-', fixture_id::text, score ->> 'id')) as fixture_score_sk,
         fixture_id,
         (score ->> 'id')::int as score_id,
         (score ->> 'type_id')::int as type_id,

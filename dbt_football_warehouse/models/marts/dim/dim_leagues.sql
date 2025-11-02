@@ -1,11 +1,11 @@
 SELECT
     league_id,
-    name,
-    type,
-    sub_type,
+    name as league_name,
+    type as league_type,
+    sub_type as league_sub_type,
     active,
-    category,
-    short_code,
+    category as league_category,
+    short_code as league_short_code,
     has_jerseys,
     country_id
 FROM

@@ -1,6 +1,6 @@
 select
     season_id,
-    name,
+    name as season_year,
     pending,
     finished,
     ending_at,

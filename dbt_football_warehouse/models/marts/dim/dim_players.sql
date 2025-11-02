@@ -1,8 +1,8 @@
 select
   player_id,
   gender,
-  height,
-  weight,
+  height as player_height,
+  weight as player_weight,
   city_id,
   type_id,
   last_name,

@@ -3,7 +3,7 @@ SELECT
   city_name,
   country_id,
   region_id,
-  latitude,
-  longitude
+  latitude as city_latitude,
+  longitude as city_longitude
 FROM
     {{ ref('stg_cities') }}

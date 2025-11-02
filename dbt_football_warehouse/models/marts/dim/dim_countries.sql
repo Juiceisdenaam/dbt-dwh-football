@@ -6,7 +6,7 @@ SELECT
   continent_id,
   official_name,
   fifa_name,
-  latitude,
-  longitude
+  latitude as country_latitude,
+  longitude as country_longitude
 FROM
     {{ ref('stg_countries') }}

@@ -12,7 +12,7 @@ select id::int as fixture_id,
 
 		SELECT
 
-			md5(concat_ws('-', fixture_id::text, lineup ->> 'player_id')) as lineup_sk,
+			md5(concat_ws('-', fixture_id::text, lineup ->> 'player_id')) as fixture_lineup_sk,
 
 			fixture_id,
 

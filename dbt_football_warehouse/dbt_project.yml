@@ -44,3 +44,9 @@ models:
     analysis:
       +schema: analysis_football
       +materialized: view
+
+vars:
+  league_name: 'Eredivisie'      # Eredivisie
+  season_year: '2023/2024'    # Seizoen 2023/2024
+  country_name: 'Engeland'
+  timezone_default: 'Europe/Amsterdam'

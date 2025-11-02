@@ -1,8 +1,8 @@
 select
     tvstation_id,
-    name,
+    name as tv_station_name,
     url,
-    type,
+    type as tv_station_type,
     related_id
 from
     {{ ref('stg_tv_stations') }}

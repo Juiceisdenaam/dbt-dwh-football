@@ -1,13 +1,13 @@
 select
   venue_id,
-  name,
-  address,
+  name as venue_name,
+  address as venue_address,
   city_id,
   surface,
   zipcode,
-  capacity,
-  latitude,
-  longitude,
+  capacity as venue_capacity,
+  latitude as venue_latitude,
+  longitude as venue_longitude,
   city_name,
   country_id,
   national_team

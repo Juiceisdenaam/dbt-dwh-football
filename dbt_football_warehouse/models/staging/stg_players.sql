@@ -1,8 +1,8 @@
 select
   (data ->> 'id')::int as player_id,
   data ->> 'gender' as gender,
-  data ->> 'height' as height,
-  data ->> 'weight' as weight,
+  (data ->> 'height')::numeric as height,
+  (data ->> 'weight')::numeric as weight,
   (data ->> 'city_id')::int as city_id,
   (data ->> 'type_id')::int as type_id,
   data ->> 'lastname' as last_name,
