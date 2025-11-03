@@ -1,0 +1,38 @@
+version: 2
+
+models:
+  - name: fct_events
+    description: "Feittabel met alle wedstrijd-events (doelpunten, kaarten, wissels, enz.)."
+    config:
+      materialized: table
+      indexes:
+        - columns: [event_id]
+          unique: true
+        - columns: [fixture_id, minute]   # optioneel, voor query performance
+    columns:
+      - name: event_id
+        description: "Unieke ID van het event (PK)."
+        tests:
+          - not_null
+          - unique
+
+      - name: fixture_id
+        description: "Koppeling naar de wedstrijd."
+        tests:
+          - not_null
+          - relationships:
+              to: ref('fct_fixtures')
+              field: fixture_id
+
+      - name: minute
+        description: "De minuut waarop het event plaatsvond in de wedstrijd."
+
+      - name: type_id
+        description: "Type event, bijv. goal, card, substitution."
+
+      - name: player_id
+        description: "Speler-ID van betrokken speler."
+        tests:
+          - relationships:
+              to: ref('dim_players')
+              field: player_id

@@ -117,6 +117,8 @@ combined as (
         f.round_id,
         f.stage_id,
         f.venue_id,
+        f.starting_at_timestamp,
+        f.starting_at,
 
         t.home_team_id,
         t.away_team_id,
