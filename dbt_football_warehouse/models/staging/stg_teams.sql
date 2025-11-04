@@ -1,9 +1,10 @@
-select
-  (data ->> 'id')::int as team_id,
-  data ->> 'name' as name,
-  data ->> 'type' as type,
-  data ->> 'founded' as founded,
-  (data ->> 'venue_id')::int as venue_id,
-  (data ->> 'country_id')::int as country_id,
-  data ->> 'short_code' as short_code
-from {{ source('ingestion', 'sportmonks_src_teams') }}
+
+SELECT
+    (data ->> 'id')::int             AS team_id,
+    (data ->> 'name')                AS team_name,
+    (data ->> 'type')                AS team_type,
+    (data ->> 'founded')::int        AS team_founded_year,
+    (data ->> 'short_code')          AS team_short_code,
+    (data ->> 'venue_id')::int       AS venue_id,
+    (data ->> 'country_id')::int     AS team_country_id
+FROM {{ source('ingestion', 'sportmonks_src_teams') }}

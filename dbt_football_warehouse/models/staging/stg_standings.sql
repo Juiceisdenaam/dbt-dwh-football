@@ -1,15 +1,13 @@
-with base as (
 
-    select
-        data as standing
-    from {{ source('ingestion', 'sportmonks_src_standings') }}
-
+WITH base AS (
+    SELECT
+        data AS standing
+    FROM {{ source('ingestion', 'sportmonks_src_standings') }}
 ),
 
-flattened as (
-
-    select
-        -- Surrogaat sleutel
+flattened AS (
+    SELECT
+        -- Surrogate key for uniqueness
         md5(
             concat_ws(
                 '-',
@@ -17,26 +15,25 @@ flattened as (
                 (standing ->> 'season_id'),
                 (standing ->> 'league_id')
             )
-        ) as standing_sk,
+        ) AS standing_sk,
 
-        -- Natuurlijke sleutels
-        (standing ->> 'id')::int as standing_id,
-        (standing ->> 'league_id')::int as league_id,
-        (standing ->> 'season_id')::int as season_id,
-        (standing ->> 'participant_id')::int as team_id,
+        -- Natural keys
+        (standing ->> 'id')::int           AS standing_id,
+        (standing ->> 'league_id')::int    AS league_id,
+        (standing ->> 'season_id')::int    AS season_id,
+        (standing ->> 'participant_id')::int AS team_id,
 
-        -- Attributen
-        (standing ->> 'points')::int as points,
-        (standing ->> 'position')::int as position,
-        (standing ->> 'round_id')::int as round_id,
-        (standing ->> 'stage_id')::int as stage_id,
-        (standing ->> 'sport_id')::int as sport_id,
-        (standing ->> 'standing_rule_id')::int as standing_rule_id,
-        (standing ->> 'result') as result,
-        (standing ->> 'group_id')::int as group_id
-
-    from base
+        -- Attributes
+        (standing ->> 'points')::int       AS points,
+        (standing ->> 'position')::int     AS position,
+        (standing ->> 'round_id')::int     AS round_id,
+        (standing ->> 'stage_id')::int     AS stage_id,
+        (standing ->> 'sport_id')::int     AS sport_id,
+        (standing ->> 'standing_rule_id')::int AS standing_rule_id,
+        (standing ->> 'result')            AS result,
+        (standing ->> 'group_id')::int     AS group_id
+    FROM base
 )
 
-select *
-from flattened
+SELECT *
+FROM flattened

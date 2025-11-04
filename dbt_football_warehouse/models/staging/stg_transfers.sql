@@ -1,14 +1,15 @@
-select
-  (data ->> 'id')::int                       as transfer_id,
-  (data ->> 'date')::date                    as transfer_date,
-  (data ->> 'amount')::numeric               as transfer_amount,
-  (data ->> 'type_id')::int                  as type_id,
-  (data ->> 'sport_id')::int                 as sport_id,
-  (data ->> 'completed')::boolean            as is_completed,
-  (data ->> 'player_id')::int                as player_id,
-  (data ->> 'to_team_id')::int               as to_team_id,
-  (data ->> 'from_team_id')::int             as from_team_id,
-  (data ->> 'position_id')::int              as position_id,
-  (data ->> 'detailed_position_id')::int     as detailed_position_id,
-  (data ->> 'career_ended')::boolean         as career_ended
-from {{ source('ingestion', 'sportmonks_src_transfers') }}
+
+SELECT
+    (data ->> 'id')::int                      AS transfer_id,
+    (data ->> 'date')::date                   AS transfer_date,
+    (data ->> 'amount')::numeric              AS transfer_amount,
+    (data ->> 'type_id')::int                 AS transfer_type_id,
+    (data ->> 'sport_id')::int                AS sport_id,
+    (data ->> 'completed')::boolean           AS is_completed,
+    (data ->> 'career_ended')::boolean        AS career_ended,
+    (data ->> 'player_id')::int               AS player_id,
+    (data ->> 'from_team_id')::int            AS from_team_id,
+    (data ->> 'to_team_id')::int              AS to_team_id,
+    (data ->> 'position_id')::int             AS position_id,
+    (data ->> 'detailed_position_id')::int    AS detailed_position_id
+FROM {{ source('ingestion', 'sportmonks_src_transfers') }}

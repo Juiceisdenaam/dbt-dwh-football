@@ -1,16 +1,13 @@
-with base as (
 
-    -- Haal elk squad record uit de JSON-array
-    select
-        jsonb_array_elements(data) as squad
-    from {{ source('ingestion', 'sportmonks_src_squads') }}
-
+WITH base AS (
+    SELECT
+        jsonb_array_elements(data) AS squad
+    FROM {{ source('ingestion', 'sportmonks_src_squads') }}
 ),
 
-flattened as (
-
-    select
-        -- Surrogaat sleutel
+flattened AS (
+    SELECT
+        -- Surrogate key
         md5(
             concat_ws(
                 '-',
@@ -18,21 +15,20 @@ flattened as (
                 (squad ->> 'team_id'),
                 (squad ->> 'season_id')
             )
-        ) as squad_sk,
+        ) AS squad_sk,
 
-        -- Natuurlijke sleutels
-        (squad ->> 'id')::int as squad_id,
-        (squad ->> 'team_id')::int as team_id,
-        (squad ->> 'player_id')::int as player_id,
-        (squad ->> 'season_id')::int as season_id,
+        -- Natural keys
+        (squad ->> 'id')::int               AS squad_id,
+        (squad ->> 'team_id')::int          AS team_id,
+        (squad ->> 'player_id')::int        AS player_id,
+        (squad ->> 'season_id')::int        AS season_id,
 
-        -- Attributen
-        (squad ->> 'has_values')::boolean as has_values,
-        (squad ->> 'position_id')::int as position_id,
-        (squad ->> 'jersey_number')::int as jersey_number
-
-    from base
+        -- Attributes
+        (squad ->> 'has_values')::boolean   AS has_values,
+        (squad ->> 'position_id')::int      AS position_id,
+        (squad ->> 'jersey_number')::int    AS jersey_number
+    FROM base
 )
 
-select *
-from flattened
+SELECT *
+FROM flattened

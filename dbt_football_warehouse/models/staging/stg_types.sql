@@ -1,29 +1,23 @@
-with base as (
 
-    select
-        data as type
-    from {{ source('ingestion', 'sportmonks_src_types') }}
-
+WITH base AS (
+    SELECT
+        data AS type
+    FROM {{ source('ingestion', 'sportmonks_src_types') }}
 ),
 
-flattened as (
+flattened AS (
+    SELECT
+        -- Natural key
+        (type ->> 'id')::int            AS type_id,
 
-    select
-        -- Surrogaat sleutel
-        md5((type ->> 'id')) as type_sk,
-
-        -- Natuurlijke sleutel
-        (type ->> 'id')::int as type_id,
-
-        -- Attributen
-        (type ->> 'code') as code,
-        (type ->> 'name') as name,
-        (type ->> 'model_type') as model_type,
-        (type ->> 'stat_group') as stat_group,
-        (type ->> 'developer_name') as developer_name
-
-    from base
+        -- Attributes
+        (type ->> 'code')               AS type_code,
+        (type ->> 'name')               AS type_name,
+        (type ->> 'model_type')         AS model_type,
+        (type ->> 'stat_group')         AS stat_group,
+        (type ->> 'developer_name')     AS developer_name
+    FROM base
 )
 
-select *
-from flattened
+SELECT *
+FROM flattened

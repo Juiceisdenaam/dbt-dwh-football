@@ -1,29 +1,23 @@
-with base as (
 
-    select
-        data as tvstation
-    from {{ source('ingestion', 'sportmonks_src_tv_stations') }}
-
+WITH base AS (
+    SELECT
+        data AS tvstation
+    FROM {{ source('ingestion', 'sportmonks_src_tv_stations') }}
 ),
 
-flattened as (
+flattened AS (
+    SELECT
+        -- Natural key
+        (tvstation ->> 'id')::int          AS tvstation_id,
 
-    select
-        -- Surrogaat sleutel
-        md5((tvstation ->> 'id')) as tvstation_sk,
-
-        -- Natuurlijke sleutel
-        (tvstation ->> 'id')::int as tvstation_id,
-
-        -- Attributen
-        (tvstation ->> 'name') as name,
-        (tvstation ->> 'url') as url,
-        (tvstation ->> 'type') as type,
-        (tvstation ->> 'image_path') as image_path,
-        (tvstation ->> 'related_id')::int as related_id
-
-    from base
+        -- Attributes
+        (tvstation ->> 'name')             AS tvstation_name,
+        (tvstation ->> 'url')              AS tvstation_url,
+        (tvstation ->> 'type')             AS tvstation_type,
+        (tvstation ->> 'image_path')       AS tvstation_image_path,
+        (tvstation ->> 'related_id')::int  AS related_id
+    FROM base
 )
 
-select *
-from flattened
+SELECT *
+FROM flattened

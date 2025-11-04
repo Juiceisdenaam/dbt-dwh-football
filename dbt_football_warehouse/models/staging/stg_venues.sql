@@ -1,14 +1,14 @@
-select
-  (data ->> 'id')::int as venue_id,
-  data ->> 'name' as name,
-  data ->> 'address' as address,
-  (data ->> 'city_id')::int as city_id,
-  data ->> 'surface' as surface,
-  data ->> 'zipcode' as zipcode,
-  data ->> 'capacity' as capacity,
-  data ->> 'latitude' as latitude,
-  data ->> 'longitude' as longitude,
-  data ->> 'city_name' as city_name,
-  (data ->> 'country_id')::int as country_id,
-  data ->> 'national_team' as national_team
-from {{ source('ingestion', 'sportmonks_src_venues') }}
+SELECT
+    (data ->> 'id')::int                AS venue_id,
+    (data ->> 'name')                   AS venue_name,
+    (data ->> 'address')                AS venue_address,
+    (data ->> 'zipcode')                AS venue_zipcode,
+    (data ->> 'surface')                AS venue_surface,
+    (data ->> 'capacity')::int          AS venue_capacity,
+    (data ->> 'latitude')::numeric      AS venue_latitude,
+    (data ->> 'longitude')::numeric     AS venue_longitude,
+    (data ->> 'city_name')              AS venue_city_name,
+    (data ->> 'national_team')::boolean AS is_national_team,
+    (data ->> 'city_id')::int           AS venue_city_id,
+    (data ->> 'country_id')::int        AS venue_country_id
+FROM {{ source('ingestion', 'sportmonks_src_venues') }}
