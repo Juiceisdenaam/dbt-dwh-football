@@ -1,4 +1,3 @@
-
 WITH base AS (
     SELECT
         jsonb_array_elements(data) AS squad

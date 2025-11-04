@@ -1,4 +1,3 @@
-
 SELECT
     (data ->> 'id')::int                      AS transfer_id,
     (data ->> 'date')::date                   AS transfer_date,

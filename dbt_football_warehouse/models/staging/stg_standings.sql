@@ -1,4 +1,3 @@
-
 WITH base AS (
     SELECT
         data AS standing

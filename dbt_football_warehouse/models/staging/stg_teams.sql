@@ -1,4 +1,3 @@
-
 SELECT
     (data ->> 'id')::int             AS team_id,
     (data ->> 'name')                AS team_name,

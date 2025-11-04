@@ -1,4 +1,3 @@
-
 SELECT
     id::int                                AS fixture_id,
     (data ->> 'name')                      AS fixture_name,
