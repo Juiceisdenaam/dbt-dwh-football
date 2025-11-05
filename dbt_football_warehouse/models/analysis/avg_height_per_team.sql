@@ -8,7 +8,7 @@ with filtered_fixtures as (
     join {{ ref('dim_seasons') }} se on f.season_id = se.season_id
     join {{ ref('dim_leagues') }} lg on f.league_id = lg.league_id
     where lg.league_name = '{{ var("league_name", "Eredivisie") }}'
-      and se.season_year = '{{ var("season_year", "2023/2024") }}'
+      and se.season_name = '{{ var("season_year", "2023/2024") }}'
 ),
 
 filtered_lineups as (
@@ -21,17 +21,17 @@ filtered_lineups as (
 team_heights as (
     select
         fl.team_id,
-        round(avg(p.player_height), 1) as avg_height_cm,
+        round(avg(p.player_height_cm), 1) as avg_height_cm,
         count(distinct fl.player_id) as unique_players
     from filtered_lineups fl
     join {{ ref('dim_players') }} p on fl.player_id = p.player_id
-    where p.player_height is not null
+    where p.player_height_cm is not null
     group by fl.team_id
 )
 
 select
     lg.league_name,
-    se.season_year,
+    se.season_name,
     st.position,
     t.team_name,
     th.avg_height_cm,
