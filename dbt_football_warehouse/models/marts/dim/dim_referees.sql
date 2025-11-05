@@ -7,7 +7,6 @@ SELECT
         referee_full_name,
         referee_gender,
         referee_date_of_birth,
-        referee_gender,
         referee_height_cm,
         referee_weight_kg,
         referee_city_id,

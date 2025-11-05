@@ -7,7 +7,6 @@ SELECT
     (data ->> 'name')                  AS referee_full_name,
     (data ->> 'gender')                AS referee_gender,
     (data ->> 'date_of_birth')::date   AS referee_date_of_birth,
-    (data ->> 'gender')                AS referee_gender,
     (data ->> 'height')::int           AS referee_height_cm,
     (data ->> 'weight')::int           AS referee_weight_kg,
     (data ->> 'city_id')::int          AS referee_city_id,
