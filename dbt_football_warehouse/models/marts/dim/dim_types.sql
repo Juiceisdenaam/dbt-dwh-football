@@ -1,8 +1,8 @@
-select
-type_id,
-code as type_code,
-name as type_name,
-model_type,
-stat_group,
-developer_name
-from {{ ref('stg_types') }}
+SELECT
+        type_id,
+        type_code,
+        type_name,
+        model_type,
+        stat_group,
+        developer_name
+FROM {{ ref('stg_types') }}

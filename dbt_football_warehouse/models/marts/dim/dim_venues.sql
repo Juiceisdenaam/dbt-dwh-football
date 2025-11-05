@@ -1,14 +1,14 @@
-select
-  venue_id,
-  name as venue_name,
-  address as venue_address,
-  city_id,
-  surface,
-  zipcode,
-  capacity as venue_capacity,
-  latitude as venue_latitude,
-  longitude as venue_longitude,
-  city_name,
-  country_id,
-  national_team
-from {{ ref('stg_venues') }}
+SELECT
+    venue_id,
+    venue_name,
+    venue_address,
+    venue_zipcode,
+    venue_surface,
+    venue_capacity,
+    venue_latitude,
+    venue_longitude,
+    venue_city_name,
+    is_national_team,
+    venue_city_id,
+    venue_country_id
+FROM {{ ref('stg_venues') }}

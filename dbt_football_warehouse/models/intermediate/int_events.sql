@@ -6,14 +6,15 @@ with base as (
 types as (
     select 
         type_id,
-        name as type_name,
-        code as type_code,
+        type_name,
+        type_code,
         model_type,
         stat_group,
         developer_name
     from {{ ref('stg_types') }}
 )
 select
+    base.fixture_event_sk,
     base.fixture_id,
     base.event_id,
     base.sub_type_id,

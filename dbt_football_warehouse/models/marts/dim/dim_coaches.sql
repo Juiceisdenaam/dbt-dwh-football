@@ -1,16 +1,16 @@
-select
+SELECT
     coach_id,
-    name as coach_name,
-    gender,
-    height as coach_height,
-    weight as coach_weight,
-    city_id,
-    lastname as last_name,
-    firstname as first_name,
+    coach_first_name,
+    coach_last_name,
+    coach_common_name,
+    coach_display_name,
+    coach_full_name,
+    coach_date_of_birth,
+    coach_gender,
+    coach_height_cm,
+    coach_weight_kg,
+    coach_city_id,
+    coach_country_id,
+    coach_nationality_id
     player_id,
-    country_id,
-    common_name,
-    display_name,
-    date_of_birth,
-    nationality_id
-from {{ ref('stg_coaches') }}
+FROM {{ ref('stg_coaches') }}

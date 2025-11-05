@@ -72,8 +72,8 @@ coaches_pivot as (
 formations as (
     select
         fixture_id,
-        case when location = 'home' then formation end as home_formation,
-        case when location = 'away' then formation end as away_formation
+        case when formation_location = 'home' then formation end as home_formation,
+        case when formation_location = 'away' then formation end as away_formation
     from {{ ref('stg_fixtures_formations') }}
 ),
 formations_pivot as (
@@ -117,8 +117,8 @@ combined as (
         f.round_id,
         f.stage_id,
         f.venue_id,
-        f.starting_at_timestamp,
-        f.starting_at,
+        f.fixture_start_timestamp,
+        f.fixture_start_time,
 
         t.home_team_id,
         t.away_team_id,

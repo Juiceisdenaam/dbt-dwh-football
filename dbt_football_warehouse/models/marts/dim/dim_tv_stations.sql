@@ -1,8 +1,9 @@
-select
-    tvstation_id,
-    name as tv_station_name,
-    url,
-    type as tv_station_type,
-    related_id
-from
+SELECT
+        tvstation_id,
+        tvstation_name,
+        tvstation_url,
+        tvstation_type,
+        tvstation_image_path,
+        related_id
+FROM
     {{ ref('stg_tv_stations') }}
