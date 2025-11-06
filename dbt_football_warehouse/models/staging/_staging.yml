@@ -26,14 +26,36 @@ models:
         description: "Gender of the coach."
       - name: coach_height_cm
         description: "Height of the coach in centimeters."
+        tests:
+          - value_in_range:
+              min_value: 150
+              max_value: 220
+              severity: warn
       - name: coach_weight_kg
         description: "Weight of the coach in kilograms."
+        tests:
+          - value_in_range:
+              min_value: 50
+              max_value: 130
+              severity: warn
       - name: coach_city_id
         description: "Foreign key referencing the city associated with the coach."
+        tests:
+          - relationships:
+              to: ref('stg_cities')
+              field: city_id
       - name: coach_country_id
         description: "Foreign key referencing the country associated with the coach."
+        tests:
+          - relationships:
+              to: ref('stg_countries')
+              field: country_id
       - name: coach_nationality_id
         description: "Foreign key referencing the nationality of the coach."
+        tests:
+          - relationships:
+              to: ref('stg_countries')
+              field: country_id
       - name: linked_player_id
         description: "Foreign key referencing a player linked to the coach."
         tests:
@@ -72,38 +94,6 @@ models:
       - name: player_nationality_id
         description: "Foreign key referencing the nationality of the player."
 
-  - name: stg_squads
-    description: "Staging model for squads data from Sportmonks API."
-    columns:
-      - name: squad_id
-        description: "Unique identifier for the squad."
-        tests:
-          - not_null
-          - unique
-      - name: team_id
-        description: "Foreign key referencing the team associated with the squad."
-        tests:
-          - not_null
-          - relationships:
-              to: ref('stg_teams')
-              field: team_id
-      - name: season_id
-        description: "Foreign key referencing the season associated with the squad."
-        tests:
-          - not_null
-      - name: coach_id
-        description: "Foreign key referencing the coach associated with the squad."
-        tests:
-          - relationships:
-              to: ref('stg_coaches')
-              field: coach_id
-      - name: squad_name
-        description: "Display name of the squad."
-        tests:
-          - not_null
-      - name: squad_type
-        description: "Type of squad (e.g., first team, reserves)."
-
   - name: stg_teams
     description: "Staging model for teams data from Sportmonks API."
     columns:
@@ -137,7 +127,7 @@ models:
       - name: league_id
         tests:
           - relationships:
-              to: ref('stg_leaguess')
+              to: ref('stg_leagues')
               field: league_id
       - name: season_id
         tests:
