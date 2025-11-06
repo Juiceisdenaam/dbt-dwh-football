@@ -11,6 +11,6 @@ SELECT
         (data ->> 'weight')::int                AS coach_weight_kg,
         (data ->> 'city_id')::int               AS coach_city_id,
         (data ->> 'country_id')::int            AS coach_country_id,
-        (data ->> 'nationality_id')::int        AS coach_nationality_id
-        (data ->> 'player_id')::int             AS player_id,
+        (data ->> 'nationality_id')::int        AS coach_nationality_id,
+        (data ->> 'player_id')::int             AS player_id
 FROM {{ source('ingestion', 'sportmonks_src_coaches') }}

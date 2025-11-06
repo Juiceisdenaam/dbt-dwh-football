@@ -1,20 +1,22 @@
 WITH src AS (
     SELECT
         id::int AS fixture_id,
-        jsonb_array_elements(data -> 'formations') AS formation
+        jsonb_array_elements(data -> 'coaches') AS coach
     FROM {{ source('ingestion', 'sportmonks_src_fixtures') }}
 ),
 
 flattened AS (
     SELECT
-        -- Surrogate key for uniqueness (fixture_id + formation_id)
-        md5(concat_ws('-', fixture_id::text, formation ->> 'id')) AS fixture_formation_sk,
+        -- Surrogate key for uniqueness (fixture + coach)
+        md5(concat_ws(
+            '-', 
+            fixture_id::text, 
+            (coach ->> 'id')
+        )) AS fixture_coach_sk,
 
         fixture_id,
-        (formation ->> 'id')::int            AS formation_id,
-        (formation ->> 'location')           AS formation_location,
-        (formation ->> 'participant_id')::int AS team_id,
-        (formation ->> 'formation')          AS formation_name
+        (coach ->> 'id')::int AS coach_id,
+        (coach -> 'meta' ->> 'participant_id')::int AS team_id
     FROM src
 )
 

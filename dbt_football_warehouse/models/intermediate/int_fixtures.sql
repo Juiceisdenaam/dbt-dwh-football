@@ -72,8 +72,8 @@ coaches_pivot as (
 formations as (
     select
         fixture_id,
-        case when formation_location = 'home' then formation end as home_formation,
-        case when formation_location = 'away' then formation end as away_formation
+        case when formation_location = 'home' then formation_location end as home_formation,
+        case when formation_location = 'away' then formation_location end as away_formation
     from {{ ref('stg_fixtures_formations') }}
 ),
 formations_pivot as (

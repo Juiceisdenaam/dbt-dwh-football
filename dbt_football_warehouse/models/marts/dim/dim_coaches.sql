@@ -12,5 +12,5 @@ SELECT
     coach_city_id,
     coach_country_id,
     coach_nationality_id
-    player_id,
+    player_id
 FROM {{ ref('stg_coaches') }}
