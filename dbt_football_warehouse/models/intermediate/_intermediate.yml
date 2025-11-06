@@ -1,0 +1,73 @@
+version: 2
+
+models:
+  - name: int_events
+    description: "Staging model for coaches data from Sportmonks API. Normalizes JSONB source into structured columns."
+    columns:
+      - name: fixture_event_sk
+      - name: fixture_id
+      - name: event_id
+      - name: sub_type_id
+      - name: minute
+      - name: extra_minute
+      - name: player_id
+      - name: related_player_id
+      - name: team_id
+      - name: info
+      - name: addition
+      - name: type_id
+      - name: type_name
+      - name: type_code
+      - name: model_type
+      - name: stat_group
+      - name: developer_name
+
+  - name: int_fixtures_lineups
+    description: "Staging model for coaches data from Sportmonks API. Normalizes JSONB source into structured columns."
+    columns:
+      - name: fixture_lineup_sk
+      - name: fixture_id
+      - name: player_id
+      - name: team_id
+      - name: type_id
+      - name: position_id
+      - name: jersey_number
+      - name: formation_field
+      - name: formation_position
+  
+  - name: int_fixtures_tvstations
+    description: "Staging model for coaches data from Sportmonks API. Normalizes JSONB source into structured columns."
+    columns:
+      - name: fixture_tvstation_sk
+      - name: fixture_id
+      - name: country_id
+      - name: tvstation_id
+      - name: type_id
+      - name: position_id
+      - name: jersey_number
+      - name: formation_field
+      - name: formation_position
+
+  - name: int_fixtures
+    description: "Staging model for coaches data from Sportmonks API. Normalizes JSONB source into structured columns."
+    columns:
+      - name: fixture_id
+      - name: season_id
+      - name: league_id
+      - name: round_id
+      - name: stage_id
+      - name: venue_id
+      - name: fixture_start_timestamp
+      - name: fixture_start_time
+      - name: home_team_id
+      - name: away_team_id
+      - name: home_goals
+      - name: away_goals
+      - name: home_coach_id
+      - name: away_coach_id
+      - name: home_formation
+      - name: away_formation
+      - name: referee_id
+      - name: assistant_referee_1_id
+      - name: assistant_referee_2_id
+      - name: fourth_official_id

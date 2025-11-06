@@ -3,7 +3,7 @@
 ) }}
 
 select
-    *
+    fixture_id
 from {{ ref('fct_events') }} e
 -- join {{ ref('fct_fixtures') }} f on e.fixture_id = f.fixture_id
 -- join {{ ref('dim_teams') }} t on e.team_id = t.team_id
