@@ -15,7 +15,7 @@ flattened AS (
         (tvstation ->> 'type')             AS tvstation_type,
         (tvstation ->> 'image_path')       AS tvstation_image_path,
         (tvstation ->> 'related_id')::int  AS related_id,
-        (tvstation ->> 'country_id')::int  AS country_id,
+        (tvstation ->> 'country_id')::int  AS tv_station_country_id
     FROM base
 )
 

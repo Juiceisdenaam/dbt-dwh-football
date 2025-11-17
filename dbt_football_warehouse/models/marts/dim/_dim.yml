@@ -239,6 +239,37 @@ models:
               field: league_id
       - name: is_current
 
+  - name: dim_squads
+    description: "Staging model for all referees from Sportmonks API"
+    columns:
+      - name: squad_sk
+        tests:
+          - not_null
+          - unique
+      - name: squad_id
+      - name: team_id
+        tests:
+          - relationships:
+              to: ref('dim_teams')
+              field: team_id
+      - name: player_id
+        tests:
+          - relationships:
+              to: ref('dim_players')
+              field: player_id
+      - name: season_id
+        tests:
+          - relationships:
+              to: ref('dim_seasons')
+              field: season_id
+      - name: has_values
+      - name: position_id
+        tests:
+          - relationships:
+              to: ref('dim_leagues')
+              field: league_id
+      - name: jersey_number
+
   - name: dim_teams
     description: "Staging model for teams data from Sportmonks API."
     columns:
