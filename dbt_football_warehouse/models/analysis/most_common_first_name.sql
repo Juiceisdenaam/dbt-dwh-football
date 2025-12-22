@@ -28,5 +28,5 @@ JOIN {{ ref('dim_leagues') }} l
     ON f.league_id = l.league_id
 JOIN {{ ref('dim_seasons') }} s
     ON f.season_id = s.season_id
-WHERE nr.rnk = 1
+WHERE nc.rnk = 1
 ORDER BY nc.name_count DESC
