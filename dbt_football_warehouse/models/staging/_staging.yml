@@ -1,0 +1,507 @@
+
+version: 2
+
+models:
+  - name: stg_coaches
+    description: "Staging model for coaches data from Sportmonks API. Normalizes JSONB source into structured columns."
+    columns:
+      - name: coach_id
+        description: "Unique identifier for the coach."
+        tests:
+          - not_null
+          - unique
+      - name: coach_first_name
+        description: "First name of the coach."
+      - name: coach_last_name
+        description: "Last name of the coach."
+      - name: coach_common_name
+        description: "Commonly used name for the coach."
+      - name: coach_display_name
+        description: "Display name for the coach."
+      - name: coach_full_name
+        description: "Full name of the coach."
+      - name: coach_date_of_birth
+        description: "Date of birth of the coach."
+      - name: coach_gender
+        description: "Gender of the coach."
+      - name: coach_height_cm
+        description: "Height of the coach in centimeters."
+        tests:
+          - value_in_range:
+              min_value: 150
+              max_value: 220
+              severity: warn
+      - name: coach_weight_kg
+        description: "Weight of the coach in kilograms."
+        tests:
+          - value_in_range:
+              min_value: 50
+              max_value: 130
+              severity: warn
+      - name: coach_city_id
+        description: "Foreign key referencing the city associated with the coach."
+        tests:
+          - relationships:
+              to: ref('stg_cities')
+              field: city_id
+      - name: coach_country_id
+        description: "Foreign key referencing the country associated with the coach."
+        tests:
+          - relationships:
+              to: ref('stg_countries')
+              field: country_id
+      - name: coach_nationality_id
+        description: "Foreign key referencing the nationality of the coach."
+        tests:
+          - relationships:
+              to: ref('stg_countries')
+              field: country_id
+      - name: player_id
+        description: "Foreign key referencing a player linked to the coach."
+        tests:
+          - relationships:
+              to: ref('stg_players')
+              field: player_id
+
+  - name: stg_players
+    description: "Staging model for players data from Sportmonks API."
+    columns:
+      - name: player_id
+        description: "Unique identifier for the player."
+        tests:
+          - not_null
+          - unique
+      - name: player_first_name
+        description: "First name of the player."
+      - name: player_last_name
+        description: "Last name of the player."
+      - name: player_common_name
+        description: "Commonly used name for the player."
+      - name: player_display_name
+        description: "Display name for the player."
+      - name: player_full_name
+        description: "Full name of the player."
+      - name: player_date_of_birth
+        description: "Date of birth of the player."
+      - name: player_gender
+        description: "Gender of the player."
+      - name: player_height_cm
+        description: "Height of the player in centimeters."
+      - name: player_weight_kg
+        description: "Weight of the player in kilograms."
+      - name: player_country_id
+        description: "Foreign key referencing the country associated with the player."
+        tests:
+          - relationships:
+              to: ref('stg_countries')
+              field: country_id
+      - name: player_city_id
+        description: "Foreign key referencing the country associated with the player."
+        tests:
+          - relationships:
+              to: ref('stg_cities')
+              field: city_id
+      - name: player_nationality_id
+        description: "Foreign key referencing the nationality of the player."
+        tests:
+          - relationships:
+              to: ref('stg_countries')
+              field: country_id
+      - name: player_type_id
+        tests:
+          - relationships:
+              to: ref('stg_types')
+              field: type_id
+      - name: player_position_id
+        tests:
+          - relationships:
+              to: ref('stg_types')
+              field: type_id
+
+  - name: stg_teams
+    description: "Staging model for teams data from Sportmonks API."
+    columns:
+      - name: team_id
+        description: "Unique identifier for the team."
+        tests:
+          - not_null
+          - unique
+      - name: team_name
+        description: "Name of the team."
+        tests:
+          - not_null
+      - name: team_type
+      - name: team_country_id
+        description: "Foreign key referencing the country associated with the team."
+        tests:
+          - relationships:
+              to: ref('stg_countries')
+              field: country_id
+      - name: team_founded_year
+      - name: team_short_code
+      - name: venue_id
+        tests:
+          - relationships:
+              to: ref('stg_venues')
+              field: venue_id
+
+  - name: stg_fixtures
+    description: "Staging model for all fixtures from Sportmonks API"
+    columns:
+      - name: fixture_id
+        tests:
+          - not_null
+          - unique
+      - name: fixture_name
+      - name: fixture_start_time
+      - name: fixture_start_timestamp
+      - name: venue_id
+        tests:
+          - relationships:
+              to: ref('stg_venues')
+              field: venue_id
+      - name: league_id
+        tests:
+          - relationships:
+              to: ref('stg_leagues')
+              field: league_id
+      - name: season_id
+        tests:
+          - relationships:
+              to: ref('stg_seasons')
+              field: season_id
+      - name: stage_id
+      - name: state_id
+      - name: group_id
+      - name: round_id
+      - name: is_placeholder 
+      - name: result_info 
+  
+  - name: stg_leagues
+    description: "Staging model for all leagues from Sportmonks API"
+    columns:
+      - name: league_id
+        tests:
+          - not_null
+          - unique
+      - name: league_name
+      - name: league_type
+      - name: league_sub_type
+      - name: is_active
+      - name: league_category
+      - name: league_short_code
+      - name: has_jerseys
+      - name: league_country_id
+
+  - name: stg_referees
+    description: "Staging model for all referees from Sportmonks API"
+    columns:
+      - name: referee_id
+        tests:
+          - not_null
+          - unique
+      - name: referee_first_name
+      - name: referee_last_name
+      - name: referee_common_name
+      - name: referee_display_name
+      - name: referee_full_name
+      - name: referee_gender
+      - name: referee_date_of_birth
+      - name: referee_height_cm
+      - name: referee_weight_kg
+      - name: referee_city_id
+      - name: referee_country_id
+        tests:
+          - relationships:
+              to: ref('stg_countries')
+              field: country_id
+
+  - name: stg_seasons
+    description: "Staging model for all referees from Sportmonks API"
+    columns:
+      - name: season_id
+        tests:
+          - not_null
+          - unique
+      - name: season_name
+      - name: is_pending
+      - name: is_finished
+      - name: season_start_date
+      - name: season_end_date
+      - name: league_id
+        tests:
+          - relationships:
+              to: ref('stg_leagues')
+              field: league_id
+      - name: is_current
+
+  - name: stg_squads
+    description: "Staging model for all referees from Sportmonks API"
+    columns:
+      - name: squad_sk
+        tests:
+          - not_null
+          - unique
+      - name: squad_id
+      - name: team_id
+        tests:
+          - relationships:
+              to: ref('stg_teams')
+              field: team_id
+      - name: player_id
+        tests:
+          - relationships:
+              to: ref('stg_players')
+              field: player_id
+      - name: season_id
+        tests:
+          - relationships:
+              to: ref('stg_seasons')
+              field: season_id
+      - name: has_values
+      - name: position_id
+        tests:
+          - relationships:
+              to: ref('stg_types')
+              field: type_id
+      - name: jersey_number
+  
+  - name: stg_standings
+    description: "Staging model for all referees from Sportmonks API"
+    columns:
+      - name: standing_sk
+        tests:
+          - not_null
+          - unique
+      - name: standing_id
+      - name: league_id
+        tests:
+          - relationships:
+              to: ref('stg_leagues')
+              field: league_id
+      - name: season_id
+        tests:
+          - relationships:
+              to: ref('stg_seasons')
+              field: season_id
+      - name: team_id
+        tests:
+          - relationships:
+              to: ref('stg_teams')
+              field: team_id
+      - name: points
+      - name: position
+      - name: round_id
+      - name: stage_id
+      - name: sport_id
+      - name: standing_rule_id
+      - name: result
+      - name: group_id
+
+  - name: stg_transfers
+    description: "Staging model for all referees from Sportmonks API"
+    columns:
+      - name: transfer_id
+        tests:
+          - not_null
+          - unique
+      - name: transfer_date
+      - name: transfer_amount
+      - name: transfer_type_id
+      - name: sport_id
+      - name: is_completed
+      - name: career_ended
+      - name: player_id
+        tests:
+          - relationships:
+              to: ref('stg_players')
+              field: player_id
+      - name: from_team_id
+        tests:
+          - relationships:
+              to: ref('stg_teams')
+              field: team_id
+      - name: to_team_id
+        tests:
+          - relationships:
+              to: ref('stg_teams')
+              field: team_id
+      - name: position_id
+        tests:
+          - relationships:
+              to: ref('stg_types')
+              field: type_id
+      - name: detailed_position_id
+        tests:
+          - relationships:
+              to: ref('stg_types')
+              field: type_id
+
+  - name: stg_tv_stations
+    description: "Staging model for all referees from Sportmonks API"
+    columns:
+      - name: tvstation_id
+        tests:
+          - not_null
+          - unique
+      - name: tvstation_name
+      - name: tvstation_url
+      - name: tvstation_type
+      - name: tvstation_image_path
+      - name: related_id
+      - name: country_id
+        tests:
+          - relationships:
+              to: ref('stg_countries')
+              field: country_id
+
+  - name: stg_types
+    description: "Staging model for all referees from Sportmonks API"
+    columns:
+      - name: type_id
+        tests:
+          - not_null
+          - unique
+      - name: type_code
+      - name: type_name
+      - name: model_type
+      - name: stat_group
+      - name: developer_name
+
+  - name: stg_venues
+    description: "Staging model for all referees from Sportmonks API"
+    columns:
+      - name: venue_id
+        tests:
+          - not_null
+          - unique
+      - name: venue_name
+      - name: venue_address
+      - name: venue_zipcode
+      - name: venue_surface
+      - name: venue_capacity
+      - name: venue_latitude
+      - name: venue_longitude
+      - name: venue_city_name
+      - name: is_national_team
+      - name: venue_city_id
+        tests:
+          - relationships:
+              to: ref('stg_cities')
+              field: city_id
+      - name: venue_country_id
+        tests:
+          - relationships:
+              to: ref('stg_countries')
+              field: country_id
+
+  - name: stg_fixtures_coaches
+    description: "Staging model for all referees from Sportmonks API"
+    columns:
+      - name: fixture_coach_sk
+        tests:
+          - not_null
+          - unique
+      - name: fixture_id
+      - name: coach_id
+      - name: team_id
+
+  - name: stg_fixtures_events
+    description: "Staging model for all referees from Sportmonks API"
+    columns:
+      - name: fixture_event_sk
+        tests:
+          - not_null
+          - unique
+      - name: fixture_id
+      - name: event_id
+      - name: type_id
+      - name: sub_type_id
+      - name: minute
+      - name: extra_minute
+      - name: player_id
+      - name: related_player_id
+      - name: team_id
+      - name: info
+      - name: result
+      - name: addition
+  
+  - name: stg_fixtures_formations
+    description: "Staging model for all referees from Sportmonks API"
+    columns:
+      - name: fixture_formation_sk
+        tests:
+          - not_null
+          - unique
+      - name: fixture_id
+      - name: formation_id
+      - name: formation_location
+      - name: team_id
+      - name: formation_name
+
+  - name: stg_fixtures_lineups
+    description: "Staging model for all referees from Sportmonks API"
+    columns:
+      - name: fixture_lineup_sk
+        tests:
+          - not_null
+          - unique
+      - name: fixture_id    
+      - name: player_id
+      - name: team_id
+      - name: type_id
+      - name: position_id
+      - name: jersey_number
+      - name: formation_field
+      - name: formation_position
+  
+  - name: stg_fixtures_referees
+    description: "Staging model for all referees from Sportmonks API"
+    columns:
+      - name: fixture_referee_sk
+        tests:
+          - not_null
+          - unique
+      - name: fixture_id
+      - name: referee_id
+      - name: type_id
+  
+  - name: stg_fixtures_scores
+    description: "Staging model for all referees from Sportmonks API"
+    columns:
+      - name: fixture_score_sk
+        tests:
+          - not_null
+          - unique
+      - name: fixture_id
+      - name: score_id
+      - name: type_id
+      - name: team_id
+      - name: goals
+      - name: participant_type
+      - name: description
+      - name: raw_score
+
+  - name: stg_fixtures_teams
+    description: "Staging model for all referees from Sportmonks API"
+    columns:
+      - name: fixture_team_sk
+        tests:
+          - not_null
+          - unique
+      - name: fixture_id
+      - name: team_id
+      - name: winner
+      - name: location
+      - name: position
+
+  - name: stg_fixtures_tvstations
+    description: "Staging model for all referees from Sportmonks API"
+    columns:
+      - name: fixture_tvstation_sk
+        tests:
+          - not_null
+          - unique
+      - name: fixture_id
+      - name: country_id
+      - name: tvstation_id

@@ -1,0 +1,351 @@
+
+version: 2
+
+models:
+  - name: dim_cities
+    description: "Staging model for all referees from Sportmonks API"
+    columns:
+      - name: city_id
+        tests:
+          - not_null
+          - unique
+      - name: city_name
+      - name: country_id
+        tests:
+          - relationships:
+              to: ref('dim_countries')
+              field: country_id
+      - name: region_id
+        tests:
+          - relationships:
+              to: ref('dim_regions')
+              field: region_id
+      - name: city_latitude
+      - name: city_longitude
+
+  - name: dim_coaches
+    description: "Dim model for coaches data from Sportmonks API. Normalizes JSONB source into structured columns."
+    columns:
+      - name: coach_id
+        description: "Unique identifier for the coach."
+        tests:
+          - not_null
+          - unique
+      - name: coach_first_name
+        description: "First name of the coach."
+      - name: coach_last_name
+        description: "Last name of the coach."
+      - name: coach_common_name
+        description: "Commonly used name for the coach."
+      - name: coach_display_name
+        description: "Display name for the coach."
+      - name: coach_full_name
+        description: "Full name of the coach."
+      - name: coach_date_of_birth
+        description: "Date of birth of the coach."
+      - name: coach_gender
+        description: "Gender of the coach."
+      - name: coach_height_cm
+        description: "Height of the coach in centimeters."
+        tests:
+          - value_in_range:
+              min_value: 150
+              max_value: 220
+              severity: warn
+      - name: coach_weight_kg
+        description: "Weight of the coach in kilograms."
+        tests:
+          - value_in_range:
+              min_value: 50
+              max_value: 130
+              severity: warn
+      - name: coach_city_id
+        description: "Foreign key referencing the city associated with the coach."
+        tests:
+          - relationships:
+              to: ref('dim_cities')
+              field: city_id
+      - name: coach_country_id
+        description: "Foreign key referencing the country associated with the coach."
+        tests:
+          - relationships:
+              to: ref('dim_countries')
+              field: country_id
+      - name: coach_nationality_id
+        description: "Foreign key referencing the nationality of the coach."
+        tests:
+          - relationships:
+              to: ref('dim_countries')
+              field: country_id
+      - name: player_id
+        description: "Foreign key referencing a player linked to the coach."
+        tests:
+          - relationships:
+              to: ref('dim_players')
+              field: player_id
+  - name: dim_continents
+    description: "Staging model for all referees from Sportmonks API"
+    columns:
+      - name: continent_id
+        tests:
+          - not_null
+          - unique
+      - name: continent_code
+      - name: continent_name
+
+  - name: dim_countries
+    description: "Staging model for all referees from Sportmonks API"
+    columns:
+      - name: country_id
+        tests:
+          - not_null
+          - unique
+      - name: country_name
+      - name: iso2
+      - name: iso3
+      - name: continent_id
+        tests:
+          - relationships:
+              to: ref('dim_continents')
+              field: continent_id
+      - name: country_official_name
+      - name: country_fifa_name
+      - name: country_latitude
+      - name: country_longitude
+
+  - name: dim_leagues
+    description: "Staging model for all leagues from Sportmonks API"
+    columns:
+      - name: league_id
+        tests:
+          - not_null
+          - unique
+      - name: league_name
+      - name: league_type
+      - name: league_sub_type
+      - name: is_active
+      - name: league_category
+      - name: league_short_code
+      - name: has_jerseys
+      - name: league_country_id
+
+  - name: dim_players
+    description: "Staging model for players data from Sportmonks API."
+    columns:
+      - name: player_id
+        description: "Unique identifier for the player."
+        tests:
+          - not_null
+          - unique
+      - name: player_first_name
+        description: "First name of the player."
+      - name: player_last_name
+        description: "Last name of the player."
+      - name: player_common_name
+        description: "Commonly used name for the player."
+      - name: player_display_name
+        description: "Display name for the player."
+      - name: player_full_name
+        description: "Full name of the player."
+      - name: player_date_of_birth
+        description: "Date of birth of the player."
+      - name: player_gender
+        description: "Gender of the player."
+      - name: player_height_cm
+        description: "Height of the player in centimeters."
+      - name: player_weight_kg
+        description: "Weight of the player in kilograms."
+      - name: player_country_id
+        description: "Foreign key referencing the country associated with the player."
+        tests:
+          - relationships:
+              to: ref('dim_countries')
+              field: country_id
+      - name: player_city_id
+        description: "Foreign key referencing the country associated with the player."
+        tests:
+          - relationships:
+              to: ref('dim_cities')
+              field: city_id
+      - name: player_nationality_id
+        description: "Foreign key referencing the nationality of the player."
+        tests:
+          - relationships:
+              to: ref('dim_countries')
+              field: country_id
+      - name: player_type_id
+        tests:
+          - relationships:
+              to: ref('dim_types')
+              field: type_id
+      - name: player_position_id
+        tests:
+          - relationships:
+              to: ref('dim_types')
+              field: type_id
+  - name: dim_referees
+    description: "Staging model for all referees from Sportmonks API"
+    columns:
+      - name: referee_id
+        tests:
+          - not_null
+          - unique
+      - name: referee_first_name
+      - name: referee_last_name
+      - name: referee_common_name
+      - name: referee_display_name
+      - name: referee_full_name
+      - name: referee_gender
+      - name: referee_date_of_birth
+      - name: referee_height_cm
+      - name: referee_weight_kg
+      - name: referee_city_id
+      - name: referee_country_id
+        tests:
+          - relationships:
+              to: ref('dim_countries')
+              field: country_id
+
+  - name: dim_regions
+    description: "Staging model for all referees from Sportmonks API"
+    columns:
+      - name: region_id
+        tests:
+          - not_null
+          - unique
+      - name: region_name
+      - name: country_id
+        tests:
+          - relationships:
+              to: ref('dim_countries')
+              field: country_id
+
+  - name: dim_seasons
+    description: "Staging model for all referees from Sportmonks API"
+    columns:
+      - name: season_id
+        tests:
+          - not_null
+          - unique
+      - name: season_name
+      - name: is_pending
+      - name: is_finished
+      - name: season_start_date
+      - name: season_end_date
+      - name: league_id
+        tests:
+          - relationships:
+              to: ref('dim_leagues')
+              field: league_id
+      - name: is_current
+
+  - name: dim_squads
+    description: "Staging model for all referees from Sportmonks API"
+    columns:
+      - name: squad_sk
+        tests:
+          - not_null
+          - unique
+      - name: squad_id
+      - name: team_id
+        tests:
+          - relationships:
+              to: ref('dim_teams')
+              field: team_id
+      - name: player_id
+        tests:
+          - relationships:
+              to: ref('dim_players')
+              field: player_id
+      - name: season_id
+        tests:
+          - relationships:
+              to: ref('dim_seasons')
+              field: season_id
+      - name: has_values
+      - name: position_id
+        tests:
+          - relationships:
+              to: ref('dim_leagues')
+              field: league_id
+      - name: jersey_number
+
+  - name: dim_teams
+    description: "Staging model for teams data from Sportmonks API."
+    columns:
+      - name: team_id
+        description: "Unique identifier for the team."
+        tests:
+          - not_null
+          - unique
+      - name: team_name
+        description: "Name of the team."
+        tests:
+          - not_null
+      - name: team_type
+      - name: team_country_id
+        description: "Foreign key referencing the country associated with the team."
+        tests:
+          - relationships:
+              to: ref('dim_countries')
+              field: country_id
+      - name: team_founded_year
+      - name: team_short_code
+      - name: venue_id
+        tests:
+          - relationships:
+              to: ref('dim_venues')
+              field: venue_id
+
+  - name: dim_tv_stations
+    description: "Staging model for all referees from Sportmonks API"
+    columns:
+      - name: tvstation_id
+        tests:
+          - not_null
+          - unique
+      - name: tvstation_name
+      - name: tvstation_url
+      - name: tvstation_type
+      - name: tvstation_image_path
+      - name: related_id
+
+  - name: dim_types
+    description: "Staging model for all referees from Sportmonks API"
+    columns:
+      - name: type_id
+        tests:
+          - not_null
+          - unique
+      - name: type_code
+      - name: type_name
+      - name: model_type
+      - name: stat_group
+      - name: developer_name
+
+  - name: dim_venues
+    description: "Staging model for all referees from Sportmonks API"
+    columns:
+      - name: venue_id
+        tests:
+          - not_null
+          - unique
+      - name: venue_name
+      - name: venue_address
+      - name: venue_zipcode
+      - name: venue_surface
+      - name: venue_capacity
+      - name: venue_latitude
+      - name: venue_longitude
+      - name: venue_city_name
+      - name: is_national_team
+      - name: venue_city_id
+        tests:
+          - relationships:
+              to: ref('dim_cities')
+              field: city_id
+      - name: venue_country_id
+        tests:
+          - relationships:
+              to: ref('dim_countries')
+              field: country_id

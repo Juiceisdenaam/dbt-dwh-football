@@ -1,0 +1,17 @@
+version: 2
+
+models:
+  - name: avg_height_per_team
+    description: "Staging model for all fixtures from Sportmonks API"
+    columns:
+      - name: league_name
+      - name: season_name
+      - name: position
+      - name: team_name
+      - name: avg_height_cm
+      - name: unique_players
+  
+  - name: goals_after_90_min
+    description: "Staging model for all referees from Sportmonks API"
+    columns:
+      - name: fixture_id

@@ -1,0 +1,23 @@
+SELECT
+        fixture_id,
+        season_id,
+        league_id,
+        round_id,
+        stage_id,
+        venue_id,
+        fixture_start_timestamp,
+        fixture_start_time,
+        home_team_id,
+        away_team_id,
+        home_goals,
+        away_goals,
+        home_coach_id,
+        away_coach_id,
+        home_formation,
+        away_formation,
+        referee_id,
+        assistant_referee_1_id,
+        assistant_referee_2_id,
+        fourth_official_id
+FROM
+    {{ ref('int_fixtures') }}

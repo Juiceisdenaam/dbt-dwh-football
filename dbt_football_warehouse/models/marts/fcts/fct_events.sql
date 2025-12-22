@@ -1,0 +1,20 @@
+SELECT
+    fixture_event_sk,
+    fixture_id,
+    event_id,
+    sub_type_id,
+    minute,
+    extra_minute,
+    player_id,
+    related_player_id,
+    team_id,
+    info,
+    result,
+    addition,
+    type_id,
+    type_name,
+    type_code,
+    model_type,
+    stat_group,
+    developer_name
+FROM {{ ref('int_events') }}

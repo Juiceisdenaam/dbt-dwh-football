@@ -1,0 +1,97 @@
+version: 2
+
+models:
+  - name: fct_fixtures
+    description: "Staging model for all fixtures from Sportmonks API"
+    columns:
+      - name: fixture_id
+      - name: season_id
+      - name: league_id
+      - name: round_id
+      - name: stage_id
+      - name: venue_id
+      - name: fixture_start_timestamp
+      - name: fixture_start_time
+      - name: home_team_id
+      - name: away_team_id
+      - name: home_goals
+      - name: away_goals
+      - name: home_coach_id
+      - name: away_coach_id
+      - name: home_formation
+      - name: away_formation
+      - name: referee_id
+      - name: assistant_referee_1_id
+      - name: assistant_referee_2_id
+      - name: fourth_official_id
+  
+  - name: fct_standings
+    description: "Staging model for all referees from Sportmonks API"
+    columns:
+      - name: standing_sk
+        tests:
+          - not_null
+          - unique
+      - name: standing_id
+      - name: league_id
+        tests:
+          - relationships:
+              to: ref('dim_leagues')
+              field: league_id
+      - name: season_id
+        tests:
+          - relationships:
+              to: ref('dim_seasons')
+              field: season_id
+      - name: team_id
+        tests:
+          - relationships:
+              to: ref('dim_teams')
+              field: team_id
+      - name: points
+      - name: position
+      - name: round_id
+      - name: stage_id
+      - name: sport_id
+      - name: standing_rule_id
+      - name: result
+      - name: group_id
+
+  - name: fct_transfers
+    description: "Staging model for all referees from Sportmonks API"
+    columns:
+      - name: transfer_id
+        tests:
+          - not_null
+          - unique
+      - name: transfer_date
+      - name: transfer_amount
+      - name: transfer_type_id
+      - name: sport_id
+      - name: is_completed
+      - name: career_ended
+      - name: player_id
+        tests:
+          - relationships:
+              to: ref('dim_players')
+              field: player_id
+      - name: from_team_id
+        tests:
+          - relationships:
+              to: ref('dim_teams')
+              field: team_id
+      - name: to_team_id
+        tests:
+          - relationships:
+              to: ref('dim_teams')
+              field: team_id
+      - name: position_id
+        tests:
+          - relationships:
+              to: ref('dim_types')
+              field: type_id
+      - name: detailed_position_id
+        tests:
+          - relationships:
+              to: ref('dim_types')
+              field: type_id
