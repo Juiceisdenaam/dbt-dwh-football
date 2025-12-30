@@ -38,7 +38,7 @@ SELECT
     league_name,
     COUNT(1)
 FROM final
-WHERE minute >= 88
+WHERE minute >= 85
 AND impactful_goal = 1
 GROUP BY
     team_name,
