@@ -15,7 +15,7 @@ SELECT
     s.season_name,
     t_home.team_name AS home_team,
     t_away.team_name AS away_team,
-    nc.player_display_name AS player_name
+    nc.player_display_name AS player_name,
     nc.name_count
 FROM name_counts nc
 JOIN {{ ref('fct_fixtures') }} f
