@@ -64,7 +64,7 @@ models:
               field: player_id
 
   - name: stg_players
-    description: "Staging model for players data from Sportmonks API."
+    description: "Staging model for players data from Sportmonks API. Normalizes JSONB source into structured columns."
     columns:
       - name: player_id
         description: "Unique identifier for the player."
@@ -119,7 +119,7 @@ models:
               field: type_id
 
   - name: stg_teams
-    description: "Staging model for teams data from Sportmonks API."
+    description: "Staging model for teams data from Sportmonks API. Normalizes JSONB source into structured columns."
     columns:
       - name: team_id
         description: "Unique identifier for the team."
@@ -146,7 +146,7 @@ models:
               field: venue_id
 
   - name: stg_fixtures
-    description: "Staging model for all fixtures from Sportmonks API"
+    description: "Staging model for fixtures data from Sportmonks API. Normalizes JSONB source into structured columns."
     columns:
       - name: fixture_id
         tests:
@@ -178,7 +178,7 @@ models:
       - name: result_info 
   
   - name: stg_leagues
-    description: "Staging model for all leagues from Sportmonks API"
+    description: "Staging model for leagues data from Sportmonks API. Normalizes JSONB source into structured columns."
     columns:
       - name: league_id
         tests:
@@ -194,7 +194,7 @@ models:
       - name: league_country_id
 
   - name: stg_referees
-    description: "Staging model for all referees from Sportmonks API"
+    description: "Staging model for referees data from Sportmonks API. Normalizes JSONB source into structured columns."
     columns:
       - name: referee_id
         tests:
@@ -217,7 +217,7 @@ models:
               field: country_id
 
   - name: stg_seasons
-    description: "Staging model for all referees from Sportmonks API"
+    description: "Staging model for seasons data from Sportmonks API. Normalizes JSONB source into structured columns."
     columns:
       - name: season_id
         tests:
@@ -236,7 +236,7 @@ models:
       - name: is_current
 
   - name: stg_squads
-    description: "Staging model for all referees from Sportmonks API"
+    description: "Staging model for squads data from Sportmonks API. Normalizes JSONB source into structured columns."
     columns:
       - name: squad_sk
         tests:
@@ -267,7 +267,7 @@ models:
       - name: jersey_number
   
   - name: stg_standings
-    description: "Staging model for all referees from Sportmonks API"
+    description: "Staging model for standings data from Sportmonks API. Normalizes JSONB source into structured columns."
     columns:
       - name: standing_sk
         tests:
@@ -299,7 +299,7 @@ models:
       - name: group_id
 
   - name: stg_transfers
-    description: "Staging model for all referees from Sportmonks API"
+    description: "Staging model for transfers data from Sportmonks API. Normalizes JSONB source into structured columns."
     columns:
       - name: transfer_id
         tests:
@@ -338,7 +338,7 @@ models:
               field: type_id
 
   - name: stg_tv_stations
-    description: "Staging model for all referees from Sportmonks API"
+    description: "Staging model for tv stations data from Sportmonks API. Normalizes JSONB source into structured columns."
     columns:
       - name: tvstation_id
         tests:
@@ -356,7 +356,7 @@ models:
               field: country_id
 
   - name: stg_types
-    description: "Staging model for all referees from Sportmonks API"
+    description: "Staging model for types data from Sportmonks API. Normalizes JSONB source into structured columns."
     columns:
       - name: type_id
         tests:
@@ -369,7 +369,7 @@ models:
       - name: developer_name
 
   - name: stg_venues
-    description: "Staging model for all referees from Sportmonks API"
+    description: "Staging model for venues data from Sportmonks API. Normalizes JSONB source into structured columns."
     columns:
       - name: venue_id
         tests:
@@ -396,7 +396,7 @@ models:
               field: country_id
 
   - name: stg_fixtures_coaches
-    description: "Staging model for all referees from Sportmonks API"
+    description: "Staging model for coaches per fixture data from Sportmonks API. Normalizes JSONB source into structured columns."
     columns:
       - name: fixture_coach_sk
         tests:
@@ -407,7 +407,7 @@ models:
       - name: team_id
 
   - name: stg_fixtures_events
-    description: "Staging model for all referees from Sportmonks API"
+    description: "Staging model for events per fixture data from Sportmonks API. Normalizes JSONB source into structured columns."
     columns:
       - name: fixture_event_sk
         tests:
@@ -427,7 +427,7 @@ models:
       - name: addition
   
   - name: stg_fixtures_formations
-    description: "Staging model for all referees from Sportmonks API"
+    description: "Staging model for formations per fixture data from Sportmonks API. Normalizes JSONB source into structured columns."
     columns:
       - name: fixture_formation_sk
         tests:
@@ -440,7 +440,7 @@ models:
       - name: formation_name
 
   - name: stg_fixtures_lineups
-    description: "Staging model for all referees from Sportmonks API"
+    description: "Staging model for lineups per fixture data from Sportmonks API. Normalizes JSONB source into structured columns."
     columns:
       - name: fixture_lineup_sk
         tests:
@@ -456,7 +456,7 @@ models:
       - name: formation_position
   
   - name: stg_fixtures_referees
-    description: "Staging model for all referees from Sportmonks API"
+    description: "Staging model for referees per fixture data from Sportmonks API. Normalizes JSONB source into structured columns."
     columns:
       - name: fixture_referee_sk
         tests:
@@ -467,7 +467,7 @@ models:
       - name: type_id
   
   - name: stg_fixtures_scores
-    description: "Staging model for all referees from Sportmonks API"
+    description: "Staging model for scores per fixture data from Sportmonks API. Normalizes JSONB source into structured columns."
     columns:
       - name: fixture_score_sk
         tests:
@@ -483,7 +483,7 @@ models:
       - name: raw_score
 
   - name: stg_fixtures_teams
-    description: "Staging model for all referees from Sportmonks API"
+    description: "Staging model for teams per fixture data from Sportmonks API. Normalizes JSONB source into structured columns."
     columns:
       - name: fixture_team_sk
         tests:
@@ -496,7 +496,7 @@ models:
       - name: position
 
   - name: stg_fixtures_tvstations
-    description: "Staging model for all referees from Sportmonks API"
+    description: "Staging model for tvstations per fixture data from Sportmonks API. Normalizes JSONB source into structured columns."
     columns:
       - name: fixture_tvstation_sk
         tests:

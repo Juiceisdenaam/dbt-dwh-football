@@ -2,7 +2,7 @@ version: 2
 
 models:
   - name: stg_cities
-    description: "Staging model for all referees from Sportmonks API"
+    description: "Staging model for cities data from Sportmonks API. Normalizes JSONB source into structured columns."
     columns:
       - name: city_id
         tests:
@@ -23,7 +23,7 @@ models:
       - name: city_longitude
 
   - name: stg_continents
-    description: "Staging model for all referees from Sportmonks API"
+    description: "Staging model for continents data from Sportmonks API. Normalizes JSONB source into structured columns."
     columns:
       - name: continent_id
         tests:
@@ -33,7 +33,7 @@ models:
       - name: continent_name
 
   - name: stg_countries
-    description: "Staging model for all referees from Sportmonks API"
+    description: "Staging model for countries data from Sportmonks API. Normalizes JSONB source into structured columns."
     columns:
       - name: country_id
         tests:
@@ -53,7 +53,7 @@ models:
       - name: country_longitude
 
   - name: stg_regions
-    description: "Staging model for all referees from Sportmonks API"
+    description: "Staging model for regions data from Sportmonks API. Normalizes JSONB source into structured columns."
     columns:
       - name: region_id
         tests:
