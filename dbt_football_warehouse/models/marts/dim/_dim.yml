@@ -3,7 +3,7 @@ version: 2
 
 models:
   - name: dim_cities
-    description: "Staging model for all referees from Sportmonks API"
+    description: "Dim model for all cities from Sportmonks API"
     columns:
       - name: city_id
         tests:
@@ -84,7 +84,7 @@ models:
               to: ref('dim_players')
               field: player_id
   - name: dim_continents
-    description: "Staging model for all referees from Sportmonks API"
+    description: "Dim model for all continents from Sportmonks API"
     columns:
       - name: continent_id
         tests:
@@ -94,7 +94,7 @@ models:
       - name: continent_name
 
   - name: dim_countries
-    description: "Staging model for all referees from Sportmonks API"
+    description: "Dim model for all countries from Sportmonks API"
     columns:
       - name: country_id
         tests:
@@ -114,7 +114,7 @@ models:
       - name: country_longitude
 
   - name: dim_leagues
-    description: "Staging model for all leagues from Sportmonks API"
+    description: "Dim model for all leagues from Sportmonks API"
     columns:
       - name: league_id
         tests:
@@ -130,7 +130,7 @@ models:
       - name: league_country_id
 
   - name: dim_players
-    description: "Staging model for players data from Sportmonks API."
+    description: "Dim model for players data from Sportmonks API."
     columns:
       - name: player_id
         description: "Unique identifier for the player."
@@ -184,7 +184,7 @@ models:
               to: ref('dim_types')
               field: type_id
   - name: dim_referees
-    description: "Staging model for all referees from Sportmonks API"
+    description: "Dim model for all referees from Sportmonks API"
     columns:
       - name: referee_id
         tests:
@@ -207,7 +207,7 @@ models:
               field: country_id
 
   - name: dim_regions
-    description: "Staging model for all referees from Sportmonks API"
+    description: "Dim model for all regions from Sportmonks API"
     columns:
       - name: region_id
         tests:
@@ -221,7 +221,7 @@ models:
               field: country_id
 
   - name: dim_seasons
-    description: "Staging model for all referees from Sportmonks API"
+    description: "Dim model for all seasons from Sportmonks API"
     columns:
       - name: season_id
         tests:
@@ -240,7 +240,7 @@ models:
       - name: is_current
 
   - name: dim_squads
-    description: "Staging model for all referees from Sportmonks API"
+    description: "Dim model for all squads from Sportmonks API"
     columns:
       - name: squad_sk
         tests:
@@ -271,7 +271,7 @@ models:
       - name: jersey_number
 
   - name: dim_teams
-    description: "Staging model for teams data from Sportmonks API."
+    description: "Dim model for teams data from Sportmonks API."
     columns:
       - name: team_id
         description: "Unique identifier for the team."
@@ -298,7 +298,7 @@ models:
               field: venue_id
 
   - name: dim_tv_stations
-    description: "Staging model for all referees from Sportmonks API"
+    description: "Dim model for all TV stations from Sportmonks API"
     columns:
       - name: tvstation_id
         tests:
@@ -311,7 +311,7 @@ models:
       - name: related_id
 
   - name: dim_types
-    description: "Staging model for all referees from Sportmonks API"
+    description: "Dim model for all types from Sportmonks API"
     columns:
       - name: type_id
         tests:
@@ -324,7 +324,7 @@ models:
       - name: developer_name
 
   - name: dim_venues
-    description: "Staging model for all referees from Sportmonks API"
+    description: "Dim model for all venues from Sportmonks API"
     columns:
       - name: venue_id
         tests:

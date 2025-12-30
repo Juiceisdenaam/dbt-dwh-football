@@ -2,7 +2,7 @@ version: 2
 
 models:
   - name: avg_height_per_team
-    description: "Staging model for all fixtures from Sportmonks API"
+    description: "Average height of a team in one season."
     columns:
       - name: league_name
       - name: season_name
@@ -11,7 +11,51 @@ models:
       - name: avg_height_cm
       - name: unique_players
   
-  - name: goals_after_90_min
-    description: "Staging model for all referees from Sportmonks API"
+  - name: impactful_goals_after_85_min_team
+    description: "Impactful goals after minute 85th grouped by team, season and league. Impactful defined as goal difference 0 or 1"
     columns:
-      - name: fixture_id
+      - name: team_name
+      - name: season_name
+      - name: league_name
+      - name: cnt
+  
+  - name: impactful_goals_player
+    description: "Impactful goals per player, team, season and league. Impactful defined as goal difference 0 or 1"
+    columns:
+      - name: player_display_name
+      - name: team_name
+      - name: season_name
+      - name: league_name
+      - name: total_goals
+      - name: impactful_goals
+      - name: pct_impactful
+  
+  - name: last_five_players_wearing_number
+    description: "The last 5 players that wore a specific jersey number for a club. Based on Tiktok Arsenalfanreaction"
+    columns:
+      - name: display_name
+      - name: jersey_number
+      - name: league_name
+      - name: season_name
+
+  - name: most_common_first_name
+    description: "The most common first name in a fixture in the starting 11"
+    columns:
+      - name: fixture_start_time
+      - name: league_name
+      - name: season_name
+      - name: home_team
+      - name: away_team
+      - name: player_first_name
+      - name: name_count
+  
+  - name: most_common_last_name
+    description: "The most common last name in a fixture in the starting 11"
+    columns:
+      - name: fixture_start_time
+      - name: league_name
+      - name: season_name
+      - name: home_team
+      - name: away_team
+      - name: player_name
+      - name: name_count

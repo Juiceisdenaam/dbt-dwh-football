@@ -2,7 +2,7 @@ version: 2
 
 models:
   - name: int_events
-    description: "Staging model for coaches data from Sportmonks API. Normalizes JSONB source into structured columns."
+    description: "Intermediate model for all events per fixture."
     columns:
       - name: fixture_event_sk
       - name: fixture_id
@@ -23,7 +23,7 @@ models:
       - name: developer_name
 
   - name: int_fixtures_lineups
-    description: "Staging model for coaches data from Sportmonks API. Normalizes JSONB source into structured columns."
+    description: "Intermediate model to create lineups per fixture for both home and away team"
     columns:
       - name: fixture_lineup_sk
       - name: fixture_id
@@ -36,7 +36,7 @@ models:
       - name: formation_position
   
   - name: int_fixtures_tvstations
-    description: "Staging model for coaches data from Sportmonks API. Normalizes JSONB source into structured columns."
+    description: "Intermediate model that list all tvstations that broadcasted a fixture"
     columns:
       - name: fixture_tvstation_sk
       - name: fixture_id
@@ -49,7 +49,7 @@ models:
       - name: formation_position
 
   - name: int_fixtures
-    description: "Staging model for coaches data from Sportmonks API. Normalizes JSONB source into structured columns."
+    description: "Intermediate model that gives the home team, away team, formations, officials and score per fixture"
     columns:
       - name: fixture_id
       - name: season_id

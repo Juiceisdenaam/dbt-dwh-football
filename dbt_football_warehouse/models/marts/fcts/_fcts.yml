@@ -2,7 +2,7 @@ version: 2
 
 models:
   - name: fct_fixtures
-    description: "Staging model for all fixtures from Sportmonks API"
+    description: "Fact model for all fixtures from Sportmonks API"
     columns:
       - name: fixture_id
       - name: season_id
@@ -26,7 +26,7 @@ models:
       - name: fourth_official_id
   
   - name: fct_standings
-    description: "Staging model for all referees from Sportmonks API"
+    description: "Fact model for all standings from Sportmonks API"
     columns:
       - name: standing_sk
         tests:
@@ -58,7 +58,7 @@ models:
       - name: group_id
 
   - name: fct_transfers
-    description: "Staging model for all referees from Sportmonks API"
+    description: "Fact model for all transfers from Sportmonks API"
     columns:
       - name: transfer_id
         tests:

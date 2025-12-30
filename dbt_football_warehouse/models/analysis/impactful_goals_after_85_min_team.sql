@@ -36,7 +36,7 @@ SELECT
     team_name,
     season_name,
     league_name,
-    COUNT(1)
+    COUNT(1) as cnt
 FROM final
 WHERE minute >= 85
 AND impactful_goal = 1

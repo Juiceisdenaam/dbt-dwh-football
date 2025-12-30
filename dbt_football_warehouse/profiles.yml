@@ -15,7 +15,7 @@ dbt_football_warehouse:  # Moet overeenkomen met 'name:' in dbt_project.yml
       type: postgres
       host: "{{ env_var('POSTGRES_HOSTNAME') }}"
       port: 5432
-      user: "sa_dbt_strava_prd"
+      user: "{{ env_var('PG_USER_PRD') }}"
       password: "{{ env_var('POSTGRES_PASSWORD_PRD') }}"
       dbname: football_data
       schema: ""
