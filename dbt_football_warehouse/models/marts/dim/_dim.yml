@@ -162,7 +162,7 @@ models:
               to: ref('dim_countries')
               field: country_id
       - name: player_city_id
-        description: "Foreign key referencing the country associated with the player."
+        description: "Foreign key referencing the city associated with the player."
         tests:
           - relationships:
               to: ref('dim_cities')
